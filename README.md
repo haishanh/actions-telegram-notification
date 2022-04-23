@@ -28,9 +28,22 @@ Note that GitHub Actions Notification bot is not a GitHub official one, the sour
 
 ## Development
 
+```bash
+# install deps
+yarn
+```
+
 ### Smoke Test
 
+create a `.env` file with content like below:
+
 ```bash
-export JWT="grab_your_jwt_token"
+JWT="The NOTIFICATION_TOKEN you grab from the bot"
+# if you want to use your own bot
+BOT_TOKEN="your BOT_TOKEN"
+CHAT_ID="your chat id"
+```
+
+```bash
 yarn do ./src/local.ts
 ```
