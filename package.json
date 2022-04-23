@@ -1,6 +1,6 @@
 {
   "name": "actions-telegram-notification",
-  "version": "0.0.0",
+  "version": "1.1.0",
   "private": true,
   "license": "MIT",
   "description": "GitHub Action to send Telegram notifications",
