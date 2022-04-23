@@ -1,11 +1,11 @@
-import { context } from "@actions/github";
-import jwt from "jsonwebtoken";
+import { context } from '@actions/github';
+import jwt from 'jsonwebtoken';
 
-import { TelegramService } from "./telegram";
+import { TelegramService } from './telegram';
 
 // @actions/github type'd context already
 type Context = typeof context;
-type Ctx = Omit<Context, "issue" | "payload" | "runNumber" | "action">;
+type Ctx = Omit<Context, 'issue' | 'payload' | 'runNumber' | 'action'>;
 
 // https://docs.github.com/en/actions/reference/context-and-expression-syntax-for-github-actions#job-context
 // type JobStatus = "success" | "failure" | "cancelled";
@@ -41,7 +41,7 @@ export async function run(
 
 function composePhotoUrl(context: Ctx, jobStatus: string | null): string {
   const { owner, repo } = context.repo;
-  const p3 = jobStatus === "success" ? "0" : "1";
+  const p3 = jobStatus === 'success' ? '0' : '1';
   return `https://imgsvc.vercel.app/image?w=360&h=180&u=0&p0=gha&p1=${owner}&p2=${repo}&p3=${p3}`;
 }
 
@@ -57,7 +57,7 @@ function composePhotoUrl(context: Ctx, jobStatus: string | null): string {
 function composeMessageText(context: Ctx, jobStatus: string | null): string {
   const { eventName, workflow, job, runId, actor, ref, sha } = context;
   const { owner, repo } = context.repo;
-  const shortRef = ref.replace(/^refs\/heads\//, "");
+  const shortRef = ref.replace(/^refs\/heads\//, '');
   const shortSha = sha.slice(0, 7);
   const status = renderJobStatus(jobStatus);
 
@@ -83,15 +83,15 @@ Triggered by ${actorE} with a ${eventNameE} event
 
 // https://core.telegram.org/bots/api#markdownv2-style
 // '_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '{', '}', '.', '!'
-const charsNeedEscape = "_*[]()~`>#+-=|{}.!";
+const charsNeedEscape = '_*[]()~`>#+-=|{}.!';
 
 function escapeEntities(input: string) {
   const len = input.length;
-  let output = "";
+  let output = '';
   for (let i = 0; i < len; i++) {
     const c = input[i];
     if (charsNeedEscape.indexOf(c) >= 0) {
-      output += "\\" + c;
+      output += '\\' + c;
     } else {
       output += c;
     }
@@ -100,12 +100,12 @@ function escapeEntities(input: string) {
 }
 
 function renderJobStatus(jobStatus: string | null) {
-  if (!jobStatus) return "";
+  if (!jobStatus) return '';
 
-  if (jobStatus === "success") {
-    return "success 🚀";
-  } else if (jobStatus === "failure") {
-    return "failed 🚨";
+  if (jobStatus === 'success') {
+    return 'success 🚀';
+  } else if (jobStatus === 'failure') {
+    return 'failed 🚨';
   } else {
     return jobStatus;
   }

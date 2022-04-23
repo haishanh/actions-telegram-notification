@@ -16,6 +16,7 @@ Basic:
 
 ```yaml
 - uses: haishanh/actions-telegram-notification@v1
+  if: ${{ always() }}
   with:
     notification-token: ${{ secrets.NOTIFICATION_TOKEN }}
     job-status: ${{ job.status }}
@@ -24,3 +25,12 @@ Basic:
 You can obtain a `NOTIFICATION_TOKEN` by sending the command `/token` to the [GitHub Actions Notification bot](https://t.me/ghactionsbot). After you get the token, goto your repo "Settings" page, select "Secrets" and add it as a secret environment variables there.
 
 Note that GitHub Actions Notification bot is not a GitHub official one, the source code of the bot API is [here](https://github.com/haishanh/vercel-telegram). And it's running on [vercel](https://vercel.com/).
+
+## Development
+
+### Smoke Test
+
+```bash
+export JWT="grab_your_jwt_token"
+yarn do ./src/local.ts
+```

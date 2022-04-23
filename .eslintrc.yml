@@ -7,14 +7,12 @@ parserOptions:
 extends:
   - 'plugin:@typescript-eslint/recommended'
   - 'prettier'
-  - prettier/@typescript-eslint
 
 plugins:
   - simple-import-sort
 
 env:
   node: true
-  jest: true
 
 globals:
   __DEV__: true
