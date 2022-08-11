@@ -72,7 +72,10 @@ function composeMessageText(context: Ctx, jobStatus: string | null): string {
   const text = `
 *${a}* ${shortRefE}\\(${shortSha}\\)
 
-${workflowE} ${jobE} ${status}
+Workflow: ${workflowE}
+Job: ${jobE}
+
+${status}
 
 Triggered by ${actorE} with a ${eventNameE} event
 
