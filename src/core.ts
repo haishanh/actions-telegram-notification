@@ -42,7 +42,18 @@ export async function run(
 function composePhotoUrl(context: Ctx, jobStatus: string | null): string {
   const { owner, repo } = context.repo;
   const p3 = jobStatus === 'success' ? '0' : '1';
-  return `https://imgsvc.vercel.app/image?w=360&h=180&u=0&p0=gha&p1=${owner}&p2=${repo}&p3=${p3}`;
+  const qs = new URLSearchParams({
+    w: '360',
+    h: '180',
+    u: '0',
+    p0: 'gha',
+    p1: owner,
+    p2: repo,
+    p3: p3,
+    // cache busting
+    v_: '0',
+  });
+  return `https://imgsvc.vercel.app/image?${qs}`;
 }
 
 // "eventName": "push",
