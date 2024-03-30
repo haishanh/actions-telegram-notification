@@ -1,5 +1,5 @@
 import { context } from '@actions/github';
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
 
 import { TelegramService } from './telegram';
 

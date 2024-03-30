@@ -56,8 +56,11 @@ export class TelegramService {
         parse_mode: 'MarkdownV2',
         ...body,
       });
-    } catch (e) {
-      this.handleAPIError(e);
+    } catch (e: unknown) {
+      if (e instanceof AxiosError) {
+        this.handleAPIError(e);
+      }
+      throw e;
     }
   }
 
@@ -69,8 +72,11 @@ export class TelegramService {
         parse_mode: 'MarkdownV2',
         ...body,
       });
-    } catch (e) {
-      this.handleAPIError(e);
+    } catch (e: unknown) {
+      if (e instanceof AxiosError) {
+        this.handleAPIError(e);
+      }
+      throw e;
     }
   }
 
